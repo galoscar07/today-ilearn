@@ -1,0 +1,9 @@
+{% include "polls/base.html" %}
+
+<h1>Welcome {{ user.username }}</h1>
+
+<h2>You recently watched these episodes: </h2>
+
+{% for episode in user.episode.all %}
+    <h3><a href="{% url 'polls:detailEpisode' episode.id %}">{{ episode.episodeName }}</a></h3>
+{% endfor %}

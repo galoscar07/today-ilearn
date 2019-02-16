@@ -1,0 +1,44 @@
+{% include "polls/base.html" %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<title>
+    Log in
+</title>
+
+{% block content %}
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+<div class="container">
+    <div class="card card-container">
+        <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+         <p id="profile-name" class="profile-name-card"></p>
+        <form class="form-signin" method="post" action="{% url 'login' %}">
+            <span id="reauth-email" class="reauth-email"></span>
+            {% csrf_token %}
+            <div id="inputEmail" class="form-control">
+                <td>{{ form.username.label_tag }}</td>
+                <td>{{ form.username }}</td>
+            </div>
+            <div id="inputPassword" class="form-control">
+                <td>{{ form.password.label_tag }}</td>
+                <td>{{ form.password }}</td>
+            </div>
+            <div>
+                <input type="submit" value="Log in" class="btn btn-lg btn-primary btn-block btn-signin"/>
+                <input type="hidden" name="next" value="{{ next }}" />
+            </div>
+        </form>
+        <form action="{% url 'polls:register' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Sign Up</button>
+        </form>
+        <p><a class="forgot-password" href="{% url 'password_reset' %}">Lost password?</a></p>
+
+    </div>
+</div>
+
+{% endblock %}

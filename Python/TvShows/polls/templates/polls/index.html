@@ -1,0 +1,21 @@
+{% include "polls/base.html" %}
+{% load myapp_tags %}
+
+<table>
+    <tr>
+        {% for show in latestShowsList %}
+        <td>
+            <h1><a href="{% url 'polls:detail' show.id %}">{{ show.nameTvShow }}</a></h1>
+            <p>Apparition Date | {{ show.apparitionDate }} -> End Date | {{ show.endDate }} </p>
+            <p>An episode {{ show.episodeDuration }} minutes</p>
+            <p>Genre: {{ show.genreTvShow }} </p>
+            <p>Short Description: {{ show.shortDescription }} </p>
+        </td>
+        {% if not forloop.counter|mod:2 %}
+    </tr>
+    <tr>
+        {% endif %}
+        {% endfor %}
+    </tr>
+</table>
+

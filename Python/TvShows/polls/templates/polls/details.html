@@ -1,0 +1,13 @@
+{% include "polls/base.html" %}
+
+<h1>{{ tvshow.nameTvShow }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% load myapp_tags %}
+
+{% for series in tvshow.series_set.all %}
+    <h2>{{ series.nameSeries }}</h2>
+        {% for episode in series.episode_set.all%}
+            <h3><a href="{% url 'polls:detailEpisode' episode.id %}">{{ episode.episodeName }}</a></h3>
+        {% endfor %}
+{% endfor %}

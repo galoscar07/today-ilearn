@@ -1,0 +1,11 @@
+{% include "polls/base.html" %}
+{% load myapp_tags %}
+
+<h1> {{ episode.episodeName }} </h1>
+<p> Episode number: {{ episode.episodeNumber }} </p>
+<p> Description {{ episode.episodeDescription }} </p>
+<p> Did you watched it ?</p>
+<form action="{% url 'polls:markedWatched' episode.id%}" method="post">
+    {% csrf_token %}
+    <button type="submit">Marked as watched</button>
+</form>
