@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <label>Username:
+        <input class="input-group" type="text" maxlength="25" placeholder="Please input a username" [(ngModel)]="username">
+      </label>
+      <button
+        [disabled]="!username"
+        class="btn-primary"
+        style="margin-left: 25px"
+        (click)="emptyUsername();"
+      >
+        Submit!</button>
+      <br>
+      <p>
+        This is a paragraph that outputs the fields above. The value of the input fields is: {{username}}
+      </p>
+    </div>
+  </div>
+</div>

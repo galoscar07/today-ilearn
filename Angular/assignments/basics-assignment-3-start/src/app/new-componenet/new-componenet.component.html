@@ -1,0 +1,10 @@
+<p>
+  <button (click)="toggleParagraph()" class="btn btn-primary">Display Details</button>
+
+<p [hidden]="isParagraphSupposedToAppear"> Secret password = shaorma cu de toate </p>
+<br>
+<p
+  [innerText]="clickedArray.toString()"
+  [ngStyle]="{backgroundColor: getColor()}"
+  [ngClass]="{moreThanFive: lengthArray === 5}"
+></p>
