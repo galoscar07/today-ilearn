@@ -1,0 +1,39 @@
+<div class="home-page">
+
+  <div class="banner">
+    <div class="container">
+      <h1 class="logo-font">conduit</h1>
+      <p>A place to share your knowledge.</p>
+    </div>
+  </div>
+
+  <div class="container page">
+    <div class="row">
+
+      <div class="col-md-9">
+        <div class="feed-toggle">
+          <ul class="nav nav-pills outline-active">
+            <li class="nav-item">
+              <a class="nav-link disabled" href="">Your Feed</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {{isGlobalTabActiveClass}}" (click)="globalFeedClicked()">Global Feed</a>
+            </li>
+            <li class="nav-item" *ngIf="isFilterTabOpen">
+              <a class="nav-link {{isFilterTabActiveClass}}" href>{{filterTabName}}</a>
+            </li>
+          </ul>
+        </div>
+        <app-global-feed *ngIf="isGlobalTabActive"></app-global-feed>
+        <app-filter-feed [filter]="filterName" [listOfArticle]="listOfArticledFiltere" *ngIf="isFilterTabOpen"></app-filter-feed>
+      </div>
+      <div class="col-md-3">
+        <div class="sidebar">
+          <app-popular-tags (sortArticlesByTag)="filterArticlesByTag($event)"></app-popular-tags>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

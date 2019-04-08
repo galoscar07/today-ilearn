@@ -1,0 +1,5 @@
+ <p>Popular Tags</p>
+
+    <div class="tag-list">
+      <div *ngFor="let tag of listPopularTags" class="tag-pill tag-default" (click)="articlesByTag(tag)" style="cursor: pointer;">{{tag}}</div>
+    </div>
