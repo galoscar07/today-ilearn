@@ -8,13 +8,14 @@
           <a routerLink="/register">Need an account?</a>
         </p>
 
-        <form>
+        <form (ngSubmit)="onSubmit(form)" #form="ngForm">
           <fieldset class="form-group">
-            <input class="form-control form-control-lg" type="text" placeholder="Email">
+            <input class="form-control form-control-lg" ngModel id="email" name="email" type="text" placeholder="Email">
           </fieldset>
           <fieldset class="form-group">
-            <input class="form-control form-control-lg" type="password" placeholder="Password">
+            <input class="form-control form-control-lg" ngModel id="password" name="password" type="password" placeholder="Password">
           </fieldset>
+          <span style="color: red" *ngIf="formError" >Username or password are not correct! Please try again!</span>
           <button class="btn btn-lg btn-primary pull-xs-right">
             Sign in
           </button>

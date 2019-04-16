@@ -1,6 +1,6 @@
 <div class="home-page">
 
-  <div class="banner">
+  <div class="banner" *ngIf="!authService.isUserAuthenticated()">
     <div class="container">
       <h1 class="logo-font">conduit</h1>
       <p>A place to share your knowledge.</p>
@@ -13,19 +13,51 @@
       <div class="col-md-9">
         <div class="feed-toggle">
           <ul class="nav nav-pills outline-active">
-            <li class="nav-item">
-              <a class="nav-link disabled" href="">Your Feed</a>
+            <li class="nav-item" *ngIf="authService.isUserAuthenticated()">
+              <a
+                class="nav-link {{isYourTabActiveClass}}"
+                (click)="yourFeedClicked()"
+              >Your Feed</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link {{isGlobalTabActiveClass}}" (click)="globalFeedClicked()">Global Feed</a>
+              <a
+                class="nav-link {{isGlobalTabActiveClass}}"
+                (click)="globalFeedClicked()"
+              >Global Feed</a>
             </li>
             <li class="nav-item" *ngIf="isFilterTabOpen">
-              <a class="nav-link {{isFilterTabActiveClass}}" href>{{filterTabName}}</a>
+              <a
+                class="nav-link {{isFilterTabActiveClass}}"
+                href
+              >{{filterTabName}}</a>
             </li>
           </ul>
         </div>
-        <app-global-feed *ngIf="isGlobalTabActive"></app-global-feed>
-        <app-filter-feed [filter]="filterName" [listOfArticle]="listOfArticledFiltere" *ngIf="isFilterTabOpen"></app-filter-feed>
+
+        <app-articles-list
+          [articleList]="listOfArticlesYourFeed"
+          [articleListLength]="articleListLength"
+          [totalPages]="totalPages"
+          *ngIf="isYourTabActive"
+        ></app-articles-list>
+
+        <app-articles-list
+          [articleList]="listOfArticles"
+          *ngIf="isGlobalTabActive"
+          [articleListLength]="articleListLength"
+          [totalPages]="totalPages"
+        ></app-articles-list>
+
+        <app-articles-list
+          [filter]="filterName"
+          [articleList]="listOfArticledFiltere"
+          [articleListLength]="articleListLength"
+          [totalPages]="totalPages"
+          *ngIf="isFilterTabOpen"
+        ></app-articles-list>
+
+        <!--<app-global-feed *ngIf="isGlobalTabActive"></app-global-feed>-->
+        <!--<app-filter-feed [filter]="filterName" [listOfArticle]="listOfArticledFiltere" *ngIf="isFilterTabOpen"></app-filter-feed>-->
       </div>
       <div class="col-md-3">
         <div class="sidebar">

@@ -1,0 +1,43 @@
+<div class="article-preview" *ngFor="let article of filterArticleByPage(); let i = index">
+  <div class="article-meta">
+    <a><img src="{{article.image}}"/></a>
+    <div class="info">
+      <a
+        href = '/@{{article.username}}'
+        class="author">{{article.username}}</a>
+      <span class="date">{{article.createdAt | date}}</span>
+    </div>
+    <button
+      #articleButton
+      class="btn btn-sm pull-xs-right"
+      [class.btn-primary] = "article.favorited"
+      [class.btn-outline-primary] = "!article.favorited"
+      (click)="likeOrDislikePost(article, articleButton, i)">
+      <i class="ion-heart"></i> {{article.favoritesCount}}
+    </button>
+  </div>
+  <a
+    href = '/article/{{article.slug}}'
+    class="preview-link">
+    <h1>{{article.title}}</h1>
+    <p>{{article.description}}</p>
+    <span>Read more...</span>
+    <ul class="tag-list">
+      <li *ngFor="let tag of article.tagList"
+          class="tag-default tag-pill tag-outline"
+      >{{tag}}</li>
+    </ul>
+  </a>
+</div>
+
+<nav>
+  <ul class="pagination">
+    <li class="page-item"
+        [ngClass]="{'active': pageNumber === currentPage}"
+        *ngFor="let pageNumber of totalPages"
+        (click)="setPageTo(pageNumber)">
+      <a class="page-link" >{{ pageNumber }}</a>
+    </li>
+  </ul>
+</nav>
+

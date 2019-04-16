@@ -1,17 +1,17 @@
 export class Article {
-  public title: string;
-  public slug: string;
-  public body: string;
-  public createdAt: string;
-  public updatedAt: string;
-  public tagList: string[];
-  public description: string;
-  public username: string;
-  public bio: string;
-  public image: string;
-  public following: boolean;
-  public favorited: boolean;
-  public favoritesCount: number;
+  public title = '';
+  public slug = '';
+  public body = '';
+  public createdAt = '';
+  public updatedAt = '';
+  public tagList = [];
+  public description = '';
+  public username = '';
+  public bio = '';
+  public image = '';
+  public following = true;
+  public favorited = true;
+  public favoritesCount = 0;
 
   constructor( article: any) {
     this.title = article.title;
