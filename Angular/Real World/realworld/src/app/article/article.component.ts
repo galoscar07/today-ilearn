@@ -27,8 +27,7 @@ export class ArticleComponent implements OnInit {
     const articleSlug = this.route.snapshot.paramMap.get('articleSlug');
     this.apiService.getSingleArticleBySlug(articleSlug).subscribe(
       (response: any) => {
-        console.log(response.article);
-        this.article = response.article;
+        this.article = new Article(response.article);
         // Get comments
         this.apiService.getAllCommentsForArticle(this.article.slug).subscribe(
           (response1: any) => {
@@ -68,24 +67,25 @@ export class ArticleComponent implements OnInit {
 
   followUser(type: string) {
     if (type === 'follow') {
-      this.apiService.postFollowProfile(this.article.author.username, this.userData.email).subscribe(
+      console.log(this.article.bio);
+      this.apiService.postFollowProfile(this.article.username, this.userData.email).subscribe(
         (response: any) => {
-          this.article.author.bio = response.profile.bio;
-          this.article.author.following = response.profile.following;
-          this.article.author.image = response.profile.image;
-          this.article.author.username = response.profile.username;
+          this.article.bio = response.profile.bio;
+          this.article.following = response.profile.following;
+          this.article.image = response.profile.image;
+          this.article.username = response.profile.username;
         },
         (error1) => {
           console.log(error1);
         }
       );
     } else {
-      this.apiService.delUnfollowProfile(this.article.author.username).subscribe(
+      this.apiService.delUnfollowProfile(this.article.username).subscribe(
         (response: any) => {
-          this.article.author.bio = response.profile.bio;
-          this.article.author.following = response.profile.following;
-          this.article.author.image = response.profile.image;
-          this.article.author.username = response.profile.username;
+          this.article.bio = response.profile.bio;
+          this.article.following = response.profile.following;
+          this.article.image = response.profile.image;
+          this.article.username = response.profile.username;
         },
         (error1) => {
           console.log(error1);

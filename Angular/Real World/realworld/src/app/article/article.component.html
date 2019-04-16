@@ -6,32 +6,32 @@
       <h1>{{article.title}}</h1>
 
       <div class="article-meta">
-        <a href=""> <img src="{{article.author.image}}"/> </a>
+        <a href=""> <img src="{{article.image}}"/> </a>
         <div class="info">
-          <a href="" class="author">{{article.author.username}}</a>
+          <a href="" class="author">{{article.username}}</a>
           <span class="date">{{article.createdAt | date}}</span>
         </div>
 
         <button
-          *ngIf="article.author.username !== userData.username && !article.author.following"
+          *ngIf="article.username !== userData.username && !article.following"
           class="btn btn-sm btn-outline-secondary"
           (click)="followUser('follow')"
         >
           <i class="ion-plus-round"></i>
-          Follow {{article.author.username}} <span class="counter"></span>
+          Follow {{article.username}} <span class="counter"></span>
         </button>
 
         <button
-          *ngIf="article.author.username !== userData.username && article.author.following"
+          *ngIf="article.username !== userData.username && article.following"
           class="btn btn-sm btn-outline-secondary"
           (click)="followUser('unfollow')"
         >
           <i class="ion-plus-round"></i>
-          Unfollow {{article.author.username}} <span class="counter"></span>
+          Unfollow {{article.username}} <span class="counter"></span>
         </button>
         &nbsp;&nbsp;
         <button
-          *ngIf="article.author.username !== userData.username"
+          *ngIf="article.username !== userData.username"
           class="btn btn-sm"
           [class.btn-primary] = "article.favorited"
           [class.btn-outline-primary] = "!article.favorited"
@@ -43,7 +43,7 @@
         </button>
 
         <button
-          *ngIf="article.author.username === userData.username"
+          *ngIf="article.username === userData.username"
           class="btn btn-outline-secondary btn-sm"
           [routerLink]="['/editor/' + article.slug]"
         >
@@ -53,7 +53,7 @@
         </button>
 
         <button
-          *ngIf="article.author.username === userData.username"
+          *ngIf="article.username === userData.username"
           class="btn btn-outline-danger btn-sm"
           (click)="deleteArticleClicked()"
         >
@@ -85,32 +85,32 @@
 
     <div class="article-actions">
       <div class="article-meta">
-        <a href><img src="{{article.author.image}}" /></a>
+        <a href><img src="{{article.image}}" /></a>
         <div class="info">
-          <a href="" class="author">{{article.author.username}}</a>
+          <a href="" class="author">{{article.username}}</a>
           <span class="date">{{article.createdAt | date}}</span>
         </div>
 
         <button
-          *ngIf="article.author.username !== userData.username && !article.author.following"
+          *ngIf="article.username !== userData.username && !article.following"
           class="btn btn-sm btn-outline-secondary"
           (click)="followUser('follow')"
         >
           <i class="ion-plus-round"></i>
-          Follow {{article.author.username}} <span class="counter"></span>
+          Follow {{article.username}} <span class="counter"></span>
         </button>
 
         <button
-          *ngIf="article.author.username !== userData.username && article.author.following"
+          *ngIf="article.username !== userData.username && article.following"
           class="btn btn-sm btn-outline-secondary"
           (click)="followUser('unfollow')"
         >
           <i class="ion-plus-round"></i>
-          Unfollow {{article.author.username}} <span class="counter"></span>
+          Unfollow {{article.username}} <span class="counter"></span>
         </button>
         &nbsp;&nbsp;
         <button
-          *ngIf="article.author.username !== userData.username"
+          *ngIf="article.username !== userData.username"
           class="btn btn-sm"
           (click)="likeOrDislikePost()"
           [class.btn-primary] = "article.favorited"
@@ -122,7 +122,7 @@
         </button>
 
         <button
-          *ngIf="article.author.username === userData.username"
+          *ngIf="article.username === userData.username"
           class="btn btn-outline-secondary btn-sm">
           <i class="ion-edit"></i>
           &nbsp;
@@ -130,7 +130,7 @@
         </button>
 
         <button
-          *ngIf="article.author.username === userData.username"
+          *ngIf="article.username === userData.username"
           class="btn btn-outline-danger btn-sm"
           (click)="deleteArticleClicked()"
         >
