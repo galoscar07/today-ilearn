@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, DoCheck, OnInit} from '@angular/core';
 import {ApiService} from '../../shared/api.service';
 import {Article} from '../../shared/article.model';
 import {User} from '../../shared/user.model';
@@ -15,6 +15,7 @@ export class UserArticlesComponent implements OnInit {
   articleList: Article[] = null;
   articleListLength = 0;
   totalPages = [];
+  loading = true;
 
   constructor(private apiService: ApiService,
               private user: User,
@@ -23,7 +24,6 @@ export class UserArticlesComponent implements OnInit {
 
   getListByAuthor() {
     const listArt: Article[] = [];
-    console.log(this.userProfileService.username);
     this.apiService.getArticlesByAuthor(this.userProfileService.username).subscribe(
       (response: any) => {
         for (const article of response.articles) {
@@ -35,17 +35,16 @@ export class UserArticlesComponent implements OnInit {
         this.articleListLength = listLength;
         this.totalPages = Array.from(Array(noPages).keys());
         this.totalPages = this.totalPages.map(elem => elem + 1);
+        this.articleList = listArt;
+        this.loading = false;
       },
       (error1 => {
-        console.log(error1);
       })
     );
-
-    return listArt;
   }
 
   ngOnInit() {
-    setTimeout(() => {this.articleList = this.getListByAuthor(); }, 1000);
+    this.getListByAuthor();
   }
 
 }

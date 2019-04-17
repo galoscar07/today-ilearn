@@ -30,15 +30,12 @@ export class SignInComponent implements OnInit {
     };
     this.apiService.postLogInUser(user).subscribe(
       (response: any) => {
-        console.log(response);
         this.authService.rememberUser(response.user.token);
         this.userData.rememberUser(response.user);
         this.formError = false;
         this.router.navigate(['/']);
-        console.log(this.userData);
       },
       (error => {
-        console.log(error);
         this.formError = true;
       })
     );

@@ -42,7 +42,6 @@ export class EditArticleComponent implements OnInit {
         });
       },
       (error1 => {
-        console.log(error1);
       })
     );
   }
@@ -54,17 +53,14 @@ export class EditArticleComponent implements OnInit {
     const tagList = this.articleUpdateForm.value.tagList;
     this.apiService.postArticles(title, description, body, tagList).subscribe(
       (response: Response) => {
-        console.log(response);
         this.router.navigate(['/']);
       },
       (error1 => {
-        console.log(error1);
       })
     );
   }
 
   onEnterPressed(tag: string) {
-    console.log(this.articleUpdateForm);
     const control = new FormControl(tag, [Validators.required]);
     (this.articleUpdateForm.get('tagList') as FormArray).push(control);
   }

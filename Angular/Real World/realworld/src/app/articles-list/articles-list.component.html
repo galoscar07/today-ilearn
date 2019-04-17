@@ -17,18 +17,22 @@
     </button>
   </div>
   <a
-    href = '/article/{{article.slug}}'
-    class="preview-link">
-    <h1>{{article.title}}</h1>
-    <p>{{article.description}}</p>
-    <span>Read more...</span>
-    <ul class="tag-list">
-      <li *ngFor="let tag of article.tagList"
-          class="tag-default tag-pill tag-outline"
-      >{{tag}}</li>
-    </ul>
+    [routerLink]="['/article/'+ article.slug]"
+    (click)="articleClicked(article)"
+    class="preview-link" >
+      <h1>{{article.title}}</h1>
+      <p>{{article.description}}</p>
+      <span (click)="articleClicked(article)">Read more...</span>
+      <ul class="tag-list">
+        <li *ngFor="let tag of article.tagList"
+            class="tag-default tag-pill tag-outline"
+        >{{tag}}</li>
+      </ul>
   </a>
 </div>
+
+<!--href = '/article/{{article.slug}}'-->
+
 
 <nav>
   <ul class="pagination">

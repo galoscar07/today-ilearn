@@ -3,6 +3,7 @@ import {Article} from '../shared/article.model';
 
 import {ApiService} from '../shared/api.service';
 import {ArticleService} from '../shared/article.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-articles-list',
@@ -11,7 +12,7 @@ import {ArticleService} from '../shared/article.service';
 })
 export class ArticlesListComponent implements OnInit {
 
-  @Input() articleList: Article[] = null;
+  @Input() articleList: Article[] = [];
   @Input() filter: string = null;
   @Input() articleListLength: number;
   @Input() totalPages: [];
@@ -19,10 +20,10 @@ export class ArticlesListComponent implements OnInit {
   currentPage = 1;
 
   constructor(private apiService: ApiService,
-              private articleService: ArticleService) {}
+              private articleService: ArticleService,
+              private router: Router) {}
 
   ngOnInit() {
-    console.log(this.articleList[0].slug);
   }
 
   updateArticle(article: Article, index: number) {
@@ -34,31 +35,35 @@ export class ArticlesListComponent implements OnInit {
     if (article.favorited) {
       this.apiService.delUnfavoriteArticle(article.slug).subscribe(
         (response: any) => {
-          this.updateArticle(response.article, index);
+          this.updateArticle(response.article, index + 1);
         },
         (error1 => {
-          console.log(error1);
+          this.router.navigate(['/login']);
         })
       );
     } else {
       this.apiService.postFavoriteArticle(article.slug).subscribe(
         (response: any) => {
-          this.updateArticle(response.article, index);
+          this.updateArticle(response.article, index + 1);
         },
         (error1 => {
-          console.log(error1);
+          this.router.navigate(['/login']);
         })
       );
     }
   }
 
   filterArticleByPage() {
-    return (this.articleList.length > 10)
+    return (this.articleList !== null && this.articleList.length > 10)
       ? this.articleList.slice((this.currentPage - 1) * 10 + 1, this.currentPage * 10)
       : this.articleList;
   }
 
   setPageTo(pageNumber: any) {
     this.currentPage = pageNumber;
+  }
+
+  articleClicked(article: Article) {
+    this.articleService.saveArticleToBePrintedOnTheArticlePage(article);
   }
 }

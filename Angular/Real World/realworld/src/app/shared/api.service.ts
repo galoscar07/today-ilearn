@@ -69,6 +69,8 @@ export class ApiService {
     return this.http.get(this.apiLink + 'articles?author=' + author);
   }
 
+  getFavourite
+
   postFavoriteArticle(slug: string) {
     return this.http.post(this.apiLink + 'articles/' + slug + '/favorite', {},
       { headers: {
@@ -90,13 +92,7 @@ export class ApiService {
   }
 
   getFavoritedByUsername(username: string) {
-    return this.http.get(this.apiLink + 'articles?favorited=' + username, {
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest',
-        Authorization: `Token ${this.authService.getCurrentToken()}`,
-      }
-    });
+    return this.http.get(this.apiLink + 'articles?favorited=' + username);
   }
 
   getProfile(username: string) {
@@ -162,7 +158,6 @@ export class ApiService {
   }
 
   postFollowProfile(username: string, email: string) {
-    console.log(this.authService.getCurrentToken());
     return this.http.post(this.apiLink + 'profiles/' + username + '/follow',
       {
         user: {

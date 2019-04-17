@@ -84,7 +84,7 @@ export class HomepageComponent implements OnInit {
         this.totalPages = Array.from(Array(noPages).keys());
         this.totalPages = this.totalPages.map(elem => elem + 1);
       },
-      (error1 => console.log(error1))
+      (error1 => {})
     );
     return listOfArt;
   }

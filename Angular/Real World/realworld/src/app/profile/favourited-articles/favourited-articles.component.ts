@@ -29,15 +29,13 @@ export class FavouritedArticlesComponent implements OnInit {
           const art = new Article(article);
           listArt.push(art);
         }
-        console.log(response);
         const listLength = response.articles.length;
-        const noPages = (listLength < 10) ? 1 : listLength / 10 ;
+        const noPages = (listLength < 10) ? 1 : Math.ceil(listLength / 10) ;
         this.articleListLength = listLength;
         this.totalPages = Array.from(Array(noPages).keys());
         this.totalPages = this.totalPages.map(elem => elem + 1);
       },
       (error1 => {
-        console.log(error1);
       })
     );
 
@@ -45,7 +43,7 @@ export class FavouritedArticlesComponent implements OnInit {
   }
 
   ngOnInit() {
-    setTimeout(() => { this.articleList = this.getListFavouriteByUser(); }, 1000);
+    this.articleList = this.getListFavouriteByUser();
   }
 
 }

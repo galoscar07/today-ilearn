@@ -1,4 +1,5 @@
 <app-articles-list
+  *ngIf="!loading"
   [articleList]="articleList"
   [articleListLength]="articleListLength"
   [totalPages]="totalPages"

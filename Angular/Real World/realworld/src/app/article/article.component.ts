@@ -5,6 +5,8 @@ import {Article} from '../shared/article.model';
 import {User} from '../shared/user.model';
 import {Comments} from '../shared/comments.model';
 import {FormControl, FormGroup} from '@angular/forms';
+import {ArticleService} from '../shared/article.service';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-article',
@@ -13,14 +15,16 @@ import {FormControl, FormGroup} from '@angular/forms';
 })
 export class ArticleComponent implements OnInit {
 
-  article: Article = null;
+  article: Article = new Article(null);
   comments: Comments[] = [];
   commentForm: FormGroup;
 
   constructor(private route: ActivatedRoute,
               private apiService: ApiService,
               private userData: User,
-              private router: Router) { }
+              private router: Router,
+              private articleService: ArticleService,
+              private authService: AuthService) { }
 
   getData() {
     // Get the article
@@ -35,13 +39,11 @@ export class ArticleComponent implements OnInit {
               this.comments.push(new Comments(comment));
             }
           },
-          (error1 => {
-            console.log(error1);
-          })
+          (error1 => {})
         );
       },
       (error1 => {
-        console.log(error1);
+        this.article = this.articleService.getArticleForArticlePage();
       })
     );
   }
@@ -56,18 +58,18 @@ export class ArticleComponent implements OnInit {
   deleteArticleClicked() {
     this.apiService.delArticle(this.article).subscribe(
       (response: any) => {
-        console.log(response);
         this.router.navigate(['/']);
       },
       (error1 => {
-        console.log(error1);
       })
     );
   }
 
   followUser(type: string) {
+    if (!this.authService.isUserAuthenticated()) {
+      this.router.navigate(['/login']);
+    }
     if (type === 'follow') {
-      console.log(this.article.bio);
       this.apiService.postFollowProfile(this.article.username, this.userData.email).subscribe(
         (response: any) => {
           this.article.bio = response.profile.bio;
@@ -76,7 +78,6 @@ export class ArticleComponent implements OnInit {
           this.article.username = response.profile.username;
         },
         (error1) => {
-          console.log(error1);
         }
       );
     } else {
@@ -88,13 +89,15 @@ export class ArticleComponent implements OnInit {
           this.article.username = response.profile.username;
         },
         (error1) => {
-          console.log(error1);
         }
       );
     }
   }
 
   likeOrDislikePost() {
+    if (!this.authService.isUserAuthenticated()) {
+      this.router.navigate(['/login']);
+    }
     if (this.article.favorited) {
       this.apiService.delUnfavoriteArticle(this.article.slug).subscribe(
         (response: any) => {
@@ -102,7 +105,6 @@ export class ArticleComponent implements OnInit {
           this.article.favoritesCount = response.article.favoritesCount;
         },
         (error1 => {
-          console.log(error1);
         })
       );
     } else {
@@ -112,7 +114,6 @@ export class ArticleComponent implements OnInit {
           this.article.favoritesCount = response.article.favoritesCount;
         },
         (error1 => {
-          console.log(error1);
         })
       );
     }
@@ -125,7 +126,6 @@ export class ArticleComponent implements OnInit {
         this.commentForm.reset();
       },
       (error1) => {
-        console.log(error1);
       }
     );
   }
@@ -138,7 +138,6 @@ export class ArticleComponent implements OnInit {
         });
       },
       (error1) => {
-        console.log(error1);
       }
     );
   }

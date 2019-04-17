@@ -42,7 +42,6 @@ export class SettingsComponent implements OnInit {
         this.router.navigate(['/@' + response.user.username]);
       },
       (error1 => {
-        console.log(error1);
       })
     );
   }

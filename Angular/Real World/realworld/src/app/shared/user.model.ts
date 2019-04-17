@@ -11,15 +11,24 @@ export class User {
   public username: string;
 
   constructor() {
-    console.log(localStorage.getItem('user'));
     const userData = JSON.parse(localStorage.getItem('user'));
-    this.bio = userData.bio;
-    this.createdAt = userData.createdAt;
-    this.email = userData.email;
-    this.id = userData.id;
-    this.image = userData.image;
-    this.updatedAt = userData.updatedAt;
-    this.username = userData.username;
+    if (userData) {
+      this.bio = userData.bio;
+      this.createdAt = userData.createdAt;
+      this.email = userData.email;
+      this.id = userData.id;
+      this.image = userData.image;
+      this.updatedAt = userData.updatedAt;
+      this.username = userData.username;
+    } else {
+      this.bio = '';
+      this.createdAt = '';
+      this.email = '';
+      this.id = 0;
+      this.image = '';
+      this.updatedAt = '';
+      this.username = '';
+    }
   }
 
   rememberUser(userData: any) {

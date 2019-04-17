@@ -35,7 +35,7 @@
           class="btn btn-sm"
           [class.btn-primary] = "article.favorited"
           [class.btn-outline-primary] = "!article.favorited"
-          (click)="likeOrDislikePost()"
+          (click)="likeOrDislikePost(article)"
         >
           <i class="ion-heart"></i>
           &nbsp;
@@ -141,7 +141,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row" *ngIf="authService.isUserAuthenticated()">
 
       <div class="col-xs-12 col-md-8 offset-md-2">
 
@@ -166,6 +166,7 @@
           </div>
         </form>
 
+        <div *ngIf="authService.isUserAuthenticated()">
         <div class="card" *ngFor="let comment of comments">
           <div class="card-block">
             <p class="card-text">{{comment.body}}</p>
@@ -184,7 +185,7 @@
             </span>
           </div>
         </div>
-
+        </div>
         </div>
 
       </div>

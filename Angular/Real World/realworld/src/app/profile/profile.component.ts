@@ -23,13 +23,12 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.username = this.route.snapshot.paramMap.get('username').replace('@', '');
+    this.userProfileService.username = this.username;
     this.apiService.getProfile(this.username).subscribe(
         (response: any) => {
-          console.log(response);
           this.userProfileService.rememberUser(response.profile);
         },
         error1 => {
-          console.log(error1);
         }
         );
   }
@@ -48,7 +47,9 @@ export class ProfileComponent implements OnInit {
           this.userProfileService.username = response.profile.username;
         },
         (error1) => {
-          console.log(error1);
+          if (error1.status === 404) {
+            this.router.navigate(['/login']);
+          }
         }
       );
     } else {
@@ -60,7 +61,6 @@ export class ProfileComponent implements OnInit {
           this.userProfileService.username = response.profile.username;
         },
         (error1) => {
-          console.log(error1);
         }
       );
     }

@@ -34,17 +34,14 @@ export class CreateArticleComponent implements OnInit {
     const tagList = this.articleForm.value.tagList;
     this.apiService.postArticles(title, description, body, tagList).subscribe(
       (response: Response) => {
-        console.log(response);
         this.router.navigate(['/']);
       },
       (error1 => {
-        console.log(error1);
       })
     );
   }
 
   onEnterPressed(tag: string) {
-    console.log(this.articleForm);
     const control = new FormControl(tag, [Validators.required]);
     (this.articleForm.get('tagList') as FormArray).push(control);
   }
