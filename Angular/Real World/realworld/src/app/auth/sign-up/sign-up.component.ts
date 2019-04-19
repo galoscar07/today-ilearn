@@ -16,6 +16,10 @@ export class SignUpComponent implements OnInit {
   passwordError = false;
   emailError = false;
 
+  usernameErrorMessage = '';
+  passwordErrorMessage = '';
+  emailErrorMessage = '';
+
   constructor(private apiService: ApiService,
               private router: Router,
               private authService: AuthService) { }
@@ -43,14 +47,21 @@ export class SignUpComponent implements OnInit {
         this.router.navigate(['/']);
       },
       (error => {
+        this.emailError = false;
+        this.passwordError = false;
+        this.usernameError = false;
+        console.log(error);
         if (error.error.errors.hasOwnProperty('email')) {
           this.emailError = true;
+          this.emailErrorMessage = error.error.errors.email;
         }
         if (error.error.errors.hasOwnProperty('username')) {
           this.usernameError = true;
+          this.usernameErrorMessage = error.error.errors.username;
         }
         if (error.error.errors.hasOwnProperty('password')) {
           this.passwordError = true;
+          this.passwordErrorMessage = error.error.errors.password;
         }
       })
     );

@@ -15,6 +15,7 @@ export class FavouritedArticlesComponent implements OnInit {
   articleList: Article[] = null;
   articleListLength = 0;
   totalPages = [];
+  noArticles = false;
 
   constructor(private apiService: ApiService,
               private user: User,
@@ -34,6 +35,9 @@ export class FavouritedArticlesComponent implements OnInit {
         this.articleListLength = listLength;
         this.totalPages = Array.from(Array(noPages).keys());
         this.totalPages = this.totalPages.map(elem => elem + 1);
+        if (this.articleListLength === 0) {
+          this.noArticles = true;
+        }
       },
       (error1 => {
       })

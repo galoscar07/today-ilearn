@@ -39,6 +39,9 @@ export class ProfileComponent implements OnInit {
   }
 
   followUser(type: string) {
+    if (!this.authService.isUserAuthenticated()) {
+      this.router.navigate(['/login']);
+    }
     if (type === 'follow') {
       this.apiService.postFollowProfile(this.userProfileService.username, this.userData.email).subscribe(
         (response: any) => {

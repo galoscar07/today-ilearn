@@ -11,15 +11,15 @@
         <form (ngSubmit)="onSubmit(form)" #form="ngForm">
           <fieldset class="form-group">
             <input class="form-control form-control-lg" id="username" name="username" ngModel type="text" placeholder="Username">
-            <span *ngIf="usernameError" style="color: red">The username is already taken.</span>
+            <span *ngIf="usernameError" style="color: red">Username {{usernameErrorMessage}}</span>
           </fieldset>
           <fieldset class="form-group">
             <input class="form-control form-control-lg" id="email" name="email" ngModel type="text" placeholder="Email">
-            <span *ngIf="emailError" style="color: red">The email is already taken.</span>
+            <span *ngIf="emailError" style="color: red">Email {{emailErrorMessage}}</span>
           </fieldset>
           <fieldset class="form-group">
             <input class="form-control form-control-lg" id="password" name="password" ngModel type="password" placeholder="Password">
-            <span *ngIf="passwordError" style="color: red">The password is not ok.</span>
+            <span *ngIf="passwordError" style="color: red">Password {{passwordErrorMessage}}</span>
           </fieldset>
           <button class="btn btn-lg btn-primary pull-xs-right">
             Sign up

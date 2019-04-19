@@ -43,11 +43,11 @@
 
 <nav *ngIf="totalPages.length > 1">
   <ul class="pagination">
-    <li class="page-item"
+    <li class="page-item" style="cursor: pointer;"
         [ngClass]="{'active': pageNumber === currentPage}"
         *ngFor="let pageNumber of totalPages"
         (click)="setPageTo(pageNumber)">
-      <a class="page-link" >{{ pageNumber }}</a>
+      <a class="page-link" style="cursor: pointer;" href>{{ pageNumber }}</a>
     </li>
   </ul>
 </nav>

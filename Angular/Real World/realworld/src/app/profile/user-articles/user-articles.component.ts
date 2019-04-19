@@ -16,6 +16,7 @@ export class UserArticlesComponent implements OnInit {
   articleListLength = 0;
   totalPages = [];
   loading = true;
+  noArticles = false;
 
   constructor(private apiService: ApiService,
               private user: User,
@@ -38,6 +39,9 @@ export class UserArticlesComponent implements OnInit {
         this.totalPages = this.totalPages.map(elem => elem + 1);
         this.articleList = listArt;
         this.loading = false;
+        if (this.articleListLength === 0) {
+          this.noArticles = true;
+        }
       },
       (error1 => {})
     );

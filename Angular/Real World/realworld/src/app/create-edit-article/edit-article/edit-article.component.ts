@@ -41,8 +41,7 @@ export class EditArticleComponent implements OnInit {
           body: (this.article.body) ? this.article.body : ' ',
         });
       },
-      (error1 => {
-      })
+      (error1 => {})
     );
   }
 

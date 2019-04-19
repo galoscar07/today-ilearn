@@ -13,6 +13,8 @@ import {Router} from '@angular/router';
 export class SettingsComponent implements OnInit {
 
   settingsForm: FormGroup;
+  errors = { username: false, email: false, password: false};
+  errorMessages = { username: '', email: '', password: '', };
 
   constructor(private userData: User,
               private authService: AuthService,
@@ -42,6 +44,21 @@ export class SettingsComponent implements OnInit {
         this.router.navigate(['/@' + response.user.username]);
       },
       (error1 => {
+        this.errors.username = false;
+        this.errors.password = false;
+        this.errors.email = false;
+        if (error1.error.errors.hasOwnProperty('password')) {
+          this.errors.password = true;
+          this.errorMessages.password = error1.error.errors.password;
+        }
+        if (error1.error.errors.hasOwnProperty('username')) {
+          this.errors.username = true;
+          this.errorMessages.username = error1.error.errors.username;
+        }
+        if (error1.error.errors.hasOwnProperty('email')) {
+          this.errors.email = true;
+          this.errorMessages.email = error1.error.errors.email;
+        }
       })
     );
   }
