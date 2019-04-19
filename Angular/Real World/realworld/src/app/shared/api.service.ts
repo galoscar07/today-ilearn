@@ -18,8 +18,18 @@ export class ApiService {
     return this.http.get(this.apiLink + 'articles');
   }
 
+  getAllArticlesWithoutAuthAndWithOffset(offset: string) {
+    // Limit is predefined with the value 10
+    return this.http.get(this.apiLink + 'articles/?limit=10&offset=' + offset);
+  }
+
   getFilteredArticled(filter: string) {
     return this.http.get(this.apiLink + 'articles?tag=' + filter);
+  }
+
+  getFilteredArticlesWithOffset(filter: string, offset: string) {
+    // Limit is predefined at 10
+    return this.http.get(this.apiLink + 'articles?tag=' + filter + '&limit=10&offset=' + offset);
   }
 
   postRegisterUser(userDict: object) {
@@ -69,7 +79,27 @@ export class ApiService {
     return this.http.get(this.apiLink + 'articles?author=' + author);
   }
 
-  getFavourite
+  getArticlesByAuthorWithOffset(author: string, offset: string) {
+    return this.http.get(this.apiLink + 'articles?author=' + author + '&limit=10&offset=' + offset);
+  }
+
+  getYourFeed() {
+    return this.http.get(this.apiLink + 'articles/feed', {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        Authorization: `Token ${this.authService.getCurrentToken()}`,
+      }
+    });
+  }
+
+  getYourFeedWithOffset(offset: string) {
+    return this.http.get(this.apiLink + 'articles/feed?limit=10&offset=' + offset, {headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        Authorization: `Token ${this.authService.getCurrentToken()}`,
+      }});
+  }
 
   postFavoriteArticle(slug: string) {
     return this.http.post(this.apiLink + 'articles/' + slug + '/favorite', {},
@@ -93,6 +123,10 @@ export class ApiService {
 
   getFavoritedByUsername(username: string) {
     return this.http.get(this.apiLink + 'articles?favorited=' + username);
+  }
+
+  getFavoritedByUsernameWithOffset(username: string, offset: string) {
+    return this.http.get(this.apiLink + 'articles?favorited=' + username + '&limit=10&offset=' + offset);
   }
 
   getProfile(username: string) {
@@ -148,6 +182,15 @@ export class ApiService {
     });
   }
 
+  getAllCommentsForArticleWithoutAuth(slug: string) {
+    return this.http.get(this.apiLink + 'articles/' + slug + '/comments', {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+      }
+    });
+  }
+
   deleteCommentForArticle(slug: string, commentId: number) {
     return this.http.delete(this.apiLink + 'articles/' + slug + '/comments/' + commentId, {
       headers: {
@@ -180,4 +223,5 @@ export class ApiService {
       }
     });
   }
+
 }

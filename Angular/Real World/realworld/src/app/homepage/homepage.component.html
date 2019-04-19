@@ -38,6 +38,8 @@
           [articleList]="listOfArticlesYourFeed"
           [articleListLength]="articleListLength"
           [totalPages]="totalPages"
+          [noArticles]="noArticles"
+          type="your_feed"
           *ngIf="isYourTabActive"
         ></app-articles-list>
 
@@ -46,6 +48,8 @@
           *ngIf="isGlobalTabActive"
           [articleListLength]="articleListLength"
           [totalPages]="totalPages"
+          [noArticles]="noArticles"
+          type="global_feed"
         ></app-articles-list>
 
         <app-articles-list
@@ -53,7 +57,9 @@
           [articleList]="listOfArticledFiltere"
           [articleListLength]="articleListLength"
           [totalPages]="totalPages"
+          [noArticles]="noArticles"
           *ngIf="isFilterTabOpen"
+          type="filtered_feed"
         ></app-articles-list>
 
         <!--<app-global-feed *ngIf="isGlobalTabActive"></app-global-feed>-->

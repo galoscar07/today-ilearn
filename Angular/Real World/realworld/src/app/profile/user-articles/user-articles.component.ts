@@ -24,22 +24,22 @@ export class UserArticlesComponent implements OnInit {
 
   getListByAuthor() {
     const listArt: Article[] = [];
-    this.apiService.getArticlesByAuthor(this.userProfileService.username).subscribe(
+    this.apiService.getArticlesByAuthorWithOffset(this.userProfileService.username, '0').subscribe(
       (response: any) => {
         for (const article of response.articles) {
           const art = new Article(article);
           listArt.push(art);
         }
-        const listLength = response.articles.length;
-        const noPages = (listLength < 10) ? 1 : listLength / 10 ;
+        const listLength = response.articlesCount;
+        const noPages = (listLength < 10) ? 1 : Math.ceil(listLength / 10) ;
+
         this.articleListLength = listLength;
         this.totalPages = Array.from(Array(noPages).keys());
         this.totalPages = this.totalPages.map(elem => elem + 1);
         this.articleList = listArt;
         this.loading = false;
       },
-      (error1 => {
-      })
+      (error1 => {})
     );
   }
 

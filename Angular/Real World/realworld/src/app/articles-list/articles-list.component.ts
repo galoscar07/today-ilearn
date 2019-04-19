@@ -4,6 +4,7 @@ import {Article} from '../shared/article.model';
 import {ApiService} from '../shared/api.service';
 import {ArticleService} from '../shared/article.service';
 import {Router} from '@angular/router';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-articles-list',
@@ -16,12 +17,15 @@ export class ArticlesListComponent implements OnInit {
   @Input() filter: string = null;
   @Input() articleListLength: number;
   @Input() totalPages: [];
+  @Input() noArticles = false;
+  @Input() type: string = null;
 
   currentPage = 1;
 
   constructor(private apiService: ApiService,
               private articleService: ArticleService,
-              private router: Router) {}
+              private router: Router,
+              private authService: AuthService) {}
 
   ngOnInit() {
   }
@@ -32,10 +36,13 @@ export class ArticlesListComponent implements OnInit {
   }
 
   likeOrDislikePost(article: Article, articleButton: any, index: number) {
+    if (!this.authService.isUserAuthenticated()) {
+      this.router.navigate(['/login']);
+    }
     if (article.favorited) {
       this.apiService.delUnfavoriteArticle(article.slug).subscribe(
         (response: any) => {
-          this.updateArticle(response.article, index + 1);
+          this.updateArticle(response.article, index);
         },
         (error1 => {
           this.router.navigate(['/login']);
@@ -44,7 +51,7 @@ export class ArticlesListComponent implements OnInit {
     } else {
       this.apiService.postFavoriteArticle(article.slug).subscribe(
         (response: any) => {
-          this.updateArticle(response.article, index + 1);
+          this.updateArticle(response.article, index);
         },
         (error1 => {
           this.router.navigate(['/login']);
@@ -60,7 +67,100 @@ export class ArticlesListComponent implements OnInit {
   }
 
   setPageTo(pageNumber: any) {
+    this.noArticles = false;
+    this.articleList = [];
     this.currentPage = pageNumber;
+    if (this.type === 'your_feed') {
+      this.getYourFeed(pageNumber);
+    }
+    if (this.type === 'global_feed') {
+      this.getGlobalFeed(pageNumber);
+    }
+    if ( this.type === 'filtered_feed' ) {
+      this.getFilteredList(this.filter, pageNumber);
+    }
+    if (this.type === 'author_feed') {
+      this.getAuthorFeed(this.filter, pageNumber);
+    }
+    if (this.type === 'favorited_feed') {
+      this.getFavouriteFeed(this.filter, pageNumber);
+    }
+  }
+
+  getGlobalFeed(pageNumber: number) {
+    const listOfArt: Article[] = [];
+    this.noArticles = false;
+    const offset = pageNumber * 10 - 10;
+    this.apiService.getAllArticlesWithoutAuthAndWithOffset(offset.toString()).subscribe(
+      (response: any) => {
+        for (const article of response.articles) {
+          const art = new Article(article);
+          listOfArt.push(art);
+        }
+        this.articleList = listOfArt;
+      });
+  }
+
+  getFilteredList(filter: string, pageNumber: number) {
+    const listOfArticles: Article[] = [];
+    this.noArticles = false;
+    const offset = pageNumber * 10 - 10;
+    this.apiService.getFilteredArticlesWithOffset(filter, offset.toString()).subscribe(
+      (response: any) => {
+        for (const article of response.articles) {
+          const art = new Article(article);
+          listOfArticles.push(art);
+        }
+        this.articleList = listOfArticles;
+      });
+  }
+
+  getYourFeed(pageNumber: number) {
+    const listOfArt: Article[] = [];
+    this.noArticles = false;
+    const offset = pageNumber * 10 - 10;
+    this.apiService.getYourFeedWithOffset(offset.toString()).subscribe(
+      (response: any) => {
+        for (const article of response.articles) {
+          const art = new Article(article);
+          listOfArt.push(art);
+        }
+        this.articleList = listOfArt;
+      },
+      (error1 => {})
+    );
+  }
+
+  private getAuthorFeed(filter: string, pageNumber: any) {
+    const listOfArt: Article[] = [];
+    this.noArticles = false;
+    const offset = pageNumber * 10 - 10;
+    this.apiService.getArticlesByAuthorWithOffset(filter, offset.toString()).subscribe(
+      (response: any) => {
+        for (const article of response.articles) {
+          const art = new Article(article);
+          listOfArt.push(art);
+        }
+        this.articleList = listOfArt;
+      },
+      (error1 => {})
+    );
+  }
+
+  private getFavouriteFeed(filter: string, pageNumber: number) {
+    const listOfArt: Article[] = [];
+    this.noArticles = false;
+    const offset = pageNumber * 10 - 10;
+    this.apiService.getFavoritedByUsernameWithOffset(filter, offset.toString()).subscribe(
+      (response: any) => {
+        for (const article of response.articles) {
+          const art = new Article(article);
+          listOfArt.push(art);
+        }
+        this.articleList = listOfArt;
+      },
+      (error1 => {})
+    );
   }
 
   articleClicked(article: Article) {

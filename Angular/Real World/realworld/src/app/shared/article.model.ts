@@ -31,7 +31,7 @@ export class Article {
     } else {
       this.title = article.title;
       this.slug = article.slug;
-      this.body = article.bio;
+      this.body = article.body;
       this.createdAt = article.createdAt.toString();
       this.updatedAt = article.updatedAt.toString();
       this.tagList = [...article.tagList];

@@ -8,6 +8,7 @@ import {ApiService} from '../../shared/api.service';
 export class PopularTagsComponent implements OnInit {
   listPopularTags: string[];
   @Output('sortArticlesByTag') articleByTag = new EventEmitter<string>();
+  loading = true;
 
   constructor(private apiService: ApiService) { }
 
@@ -15,6 +16,7 @@ export class PopularTagsComponent implements OnInit {
     this.apiService.getAllTags().subscribe(
       (response: any) => {
         this.listPopularTags = response.tags;
+        this.loading = false;
       }
     );
   }

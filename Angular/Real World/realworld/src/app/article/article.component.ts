@@ -28,6 +28,21 @@ export class ArticleComponent implements OnInit {
 
   getData() {
     // Get the article
+    if (!this.authService.isUserAuthenticated()) {
+      this.article = this.articleService.getArticleForArticlePage();
+      // and the comments
+      const commentsList: Comments[] = [];
+      this.apiService.getAllCommentsForArticleWithoutAuth(this.article.slug).subscribe(
+        (response: any) => {
+          for ( const comment of response.comments ) {
+            commentsList.push(new Comments(comment));
+          }
+          this.comments = commentsList;
+        },
+        (error1 => {} )
+      );
+      return;
+    }
     const articleSlug = this.route.snapshot.paramMap.get('articleSlug');
     this.apiService.getSingleArticleBySlug(articleSlug).subscribe(
       (response: any) => {
@@ -43,7 +58,6 @@ export class ArticleComponent implements OnInit {
         );
       },
       (error1 => {
-        this.article = this.articleService.getArticleForArticlePage();
       })
     );
   }

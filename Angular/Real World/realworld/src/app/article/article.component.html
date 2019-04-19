@@ -6,7 +6,7 @@
       <h1>{{article.title}}</h1>
 
       <div class="article-meta">
-        <a href=""> <img src="{{article.image}}"/> </a>
+        <a href=""> <img src="{{article.image}}" default="/assets/smiley-cyrus.jpg" > </a>
         <div class="info">
           <a href="" class="author">{{article.username}}</a>
           <span class="date">{{article.createdAt | date}}</span>
@@ -85,7 +85,7 @@
 
     <div class="article-actions">
       <div class="article-meta">
-        <a href><img src="{{article.image}}" /></a>
+        <a href><img src="{{article.image}}"default="/assets/smiley-cyrus.jpg"/></a>
         <div class="info">
           <a href="" class="author">{{article.username}}</a>
           <span class="date">{{article.createdAt | date}}</span>
@@ -141,10 +141,15 @@
       </div>
     </div>
 
-    <div class="row" *ngIf="authService.isUserAuthenticated()">
+    <div
+      *ngIf="!authService.isUserAuthenticated()"
+      class="col-xs-12 col-md-8 offset-md-2">
+      <p><a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments to this article</p>
+    </div>
 
+    <div class="row">
       <div class="col-xs-12 col-md-8 offset-md-2">
-
+        <div *ngIf="authService.isUserAuthenticated()">
         <form
           [formGroup]="commentForm"
           class="card comment-form"
@@ -157,7 +162,7 @@
               placeholder="Write a comment..." rows="3"></textarea>
           </div>
           <div class="card-footer">
-            <img src="{{userData.image}}" class="comment-author-img" />
+            <img src="{{userData.image}}" class="comment-author-img" default="/assets/smiley-cyrus.jpg" wantedClass="comment-author-img"/>
             <button
               type="submit"
               class="btn btn-sm btn-primary">
@@ -165,15 +170,14 @@
             </button>
           </div>
         </form>
-
-        <div *ngIf="authService.isUserAuthenticated()">
+        </div>
         <div class="card" *ngFor="let comment of comments">
           <div class="card-block">
             <p class="card-text">{{comment.body}}</p>
           </div>
           <div class="card-footer">
             <a href="" class="comment-author">
-              <img src="{{comment.image}}" class="comment-author-img" />
+              <img src="{{comment.image}}" class="comment-author-img" default="/assets/smiley-cyrus.jpg" wantedClass="comment-author-img" />
             </a>
             &nbsp;
             <a href="" class="comment-author">{{comment.username}}</a>
@@ -184,7 +188,6 @@
                 class="ion-trash-a"></i>
             </span>
           </div>
-        </div>
         </div>
         </div>
 

@@ -24,13 +24,14 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.username = this.route.snapshot.paramMap.get('username').replace('@', '');
     this.userProfileService.username = this.username;
-    this.apiService.getProfile(this.username).subscribe(
+    if (this.authService.isUserAuthenticated()) {
+      this.apiService.getProfile(this.username).subscribe(
         (response: any) => {
           this.userProfileService.rememberUser(response.profile);
         },
-        error1 => {
-        }
-        );
+        error1 => {}
+      );
+    }
   }
 
   settingButtonClicked() {

@@ -5,13 +5,13 @@
       <div class="row">
 
         <div class="col-xs-12 col-md-10 offset-md-1">
-          <img src="{{userProfileService.image}}" class="user-img" />
+          <img src="{{userProfileService.image}}" class="user-img" default="/assets/smiley-cyrus.jpg"/>
           <h4>{{userProfileService.username}}</h4>
           <p>
             {{userProfileService.bio}}
           </p>
           <button
-            *ngIf="!userProfileService.following"
+            *ngIf="!userProfileService.following && userProfileService.username !== userData.username"
             class="btn btn-sm btn-outline-secondary action-btn"
             (click)="followUser('follow')"
           >
@@ -30,7 +30,9 @@
           <button
             *ngIf="userData.username === userProfileService.username"
             class="btn btn-sm btn-outline-secondary action-btn"
-            (click)="settingButtonClicked()">
+            (click)="settingButtonClicked()"
+            style="margin-right: 15px"
+          >
             <i class="ion-gear-a"></i>
             Edit Profile Settings
           </button>

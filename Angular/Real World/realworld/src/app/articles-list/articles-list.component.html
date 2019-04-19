@@ -1,6 +1,15 @@
+<div *ngIf="articleList.length === 0 && !noArticles" class="article-preview">
+  <p>Loading articles ...</p>
+</div>
+
+<div *ngIf="noArticles" class="article-preview">
+  No articles in this section yet!
+</div>
+
+<div *ngIf="articleListLength !== 0 ">
 <div class="article-preview" *ngFor="let article of filterArticleByPage(); let i = index">
   <div class="article-meta">
-    <a><img src="{{article.image}}"/></a>
+    <a><img src="{{article.image}}" default="/assets/smiley-cyrus.jpg"/></a>
     <div class="info">
       <a
         href = '/@{{article.username}}'
@@ -31,10 +40,8 @@
   </a>
 </div>
 
-<!--href = '/article/{{article.slug}}'-->
 
-
-<nav>
+<nav *ngIf="totalPages.length > 1">
   <ul class="pagination">
     <li class="page-item"
         [ngClass]="{'active': pageNumber === currentPage}"
@@ -44,4 +51,4 @@
     </li>
   </ul>
 </nav>
-
+</div>

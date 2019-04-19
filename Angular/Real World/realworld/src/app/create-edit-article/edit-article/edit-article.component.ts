@@ -62,7 +62,11 @@ export class EditArticleComponent implements OnInit {
 
   onEnterPressed(tag: string) {
     const control = new FormControl(tag, [Validators.required]);
-    (this.articleUpdateForm.get('tagList') as FormArray).push(control);
+    const tagList = (this.articleUpdateForm.get('tagList') as FormArray).value;
+    const position = tagList.indexOf(tag);
+    if (position === -1) {
+      (this.articleUpdateForm.get('tagList') as FormArray).push(control);
+    }
   }
 
   deleteTag(tagControl: any, i: any) {

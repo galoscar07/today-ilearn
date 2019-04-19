@@ -25,6 +25,7 @@ import { ArticlesListComponent } from './articles-list/articles-list.component';
 import {UserProfileService} from './shared/userprofile.service';
 import { EditArticleComponent } from './create-edit-article/edit-article/edit-article.component';
 import { CreateArticleComponent } from './create-edit-article/create-article/create-article.component';
+import {ImagePreloadDirective} from './shared/ImagePreload.directive';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { CreateArticleComponent } from './create-edit-article/create-article/cre
     ArticlesListComponent,
     EditArticleComponent,
     CreateArticleComponent,
+    ImagePreloadDirective
   ],
   imports: [
     BrowserModule,

@@ -23,13 +23,13 @@ export class FavouritedArticlesComponent implements OnInit {
 
   getListFavouriteByUser() {
     const listArt: Article[] = [];
-    this.apiService.getFavoritedByUsername(this.userProfileService.username).subscribe(
+    this.apiService.getFavoritedByUsernameWithOffset(this.userProfileService.username, '0').subscribe(
       (response: any) => {
         for (const article of response.articles) {
           const art = new Article(article);
           listArt.push(art);
         }
-        const listLength = response.articles.length;
+        const listLength = response.articlesCount;
         const noPages = (listLength < 10) ? 1 : Math.ceil(listLength / 10) ;
         this.articleListLength = listLength;
         this.totalPages = Array.from(Array(noPages).keys());
