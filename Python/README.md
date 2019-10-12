@@ -9,3 +9,6 @@ A simple python script that will notify the user via sms when the time schedule 
 A very simple django based app. App includes: log in and register, you can mark your favourite shows and can mark episodes as watched.
 
 
+##  GraphQL
+
+A very simple django based app, to test and understand the principles of graphQL

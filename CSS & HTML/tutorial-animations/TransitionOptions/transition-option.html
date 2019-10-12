@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Transition option</title>
+  <link rel="stylesheet" href="style.css" type="text/css" media="all">
+</head>
+<body>
+<div class="container">
+  <div class="back"><a href="../index.html"></a></div>
+  <h1>Transitions options</h1>
+  <p>Transition property and option that can be used with this property</p>
+  <ul>
+    <li>
+      <b>transition-timing-function</b>: deals with how the change in property will occur
+      <p>For example will the background color change fast at the beging and slow at the end, or it will be smooth all the way. The transition timing function have 5 different values that can be used.
+      <ul>
+        <li>
+          <b>ease</b>: the change starts slow and then go faster then finishes slow (default)
+        </li>
+        <li>
+          <b>linear</b>: the change occurs at the same rate
+        </li>
+        <li>
+          <b>ease-in</b>: the changes starts slow and then go faster before the end
+        </li>
+        <li>
+          <b>ease-out</b>: the change starts fast then slows down before the end
+        </li>
+        <li>
+          <b>ease-in-out</b>: the change starts slow then go faster then finishes slow (kind like ease, there isn't a big difference between them)
+        </li>
+      </ul>
+      <div id="ease" class="move">Ease (default)</div>
+      <div id="linear" class="move">Linear</div>
+      <div id="ease-in" class="move">Ease in</div>
+      <div id="ease-out" class="move">Ease out</div>
+      <div id="ease-in-out" class="move">Ease in out</div>
+    </li>
+    <li>
+      <b>translation-delay</b>
+      <p></p>
+      <ul>
+        <li>The time before the transition starts</li>
+        <li>Accepts values in seconds and milliseconds</li>
+      </ul>
+      <p></p>
+      <button>transition delay</button>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

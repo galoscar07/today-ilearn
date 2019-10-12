@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>2d Transforms</title>
+  <link href="styles.css" rel="stylesheet" media="all" type="text/css">
+</head>
+<script>
+  function showScaleInfo() {
+      document.getElementById('scale_info').setAttribute('display', 'block');
+      document.getElementById('translate_info').setAttribute('display', 'none');
+      document.getElementById('rotate_info').setAttribute('display', 'none');
+      document.getElementById('skew_info').setAttribute('display', 'none');
+  }
+  function showTranslateInfo() {
+      document.getElementById('scale_info').setAttribute('display', 'none');
+      document.getElementById('translate_info').setAttribute('display', 'block');
+      document.getElementById('rotate_info').setAttribute('display', 'none');
+      document.getElementById('skew_info').setAttribute('display', 'none');
+  }
+  function showRotateInfo() {
+      document.getElementById('scale_info').setAttribute('display', 'none');
+      document.getElementById('translate_info').setAttribute('display', 'none');
+      document.getElementById('rotate_info').setAttribute('display', 'block');
+      document.getElementById('skew_info').setAttribute('display', 'none');
+  }
+  function showSkewInfo() {
+      document.getElementById('scale_info').setAttribute('display', 'none');
+      document.getElementById('translate_info').setAttribute('display', 'none');
+      document.getElementById('rotate_info').setAttribute('display', 'none');
+      document.getElementById('skew_info').setAttribute('display', 'block');
+  }
+</script>
+<body>
+<div class="container">
+  <h1>2d Transforms</h1>
+  <p>Transforms doesn't control the properties, they actually controls the divs them-self's</p>
+  <p>The css transform control the div size and position and etc</p>
+  <p>Transform property have 4 functions that helps up. Those 4 are: </p>
+  <ul>
+    <li>Scale - increase/decrease height and width</li>
+    <li>Translate - move the element on the xOy scale</li>
+    <li>Rotate - self explaining only in 2d</li>
+    <li>Skew - allows us to skew the element on the x or y axes</li>
+  </ul>
+  <div class="container_for_explications">
+    <div class="examples_container">
+      <div id="scale" class="move" onclick="showScaleInfo()">Scale</div>
+      <div id="translate" class="move">Translate</div>
+      <div id="rotate" class="move">Rotate</div>
+      <div id="skew" class="move">Skew</div>
+    </div>
+    <div class="more_info_container">
+      <div id="scale_info">
+        <h2>Scale function</h2>
+          <p>
+            The scale() CSS function defines a transformation that resizes an element on the 2D plane. Because the amount of scaling is defined by a vector, it can resize the horizontal and vertical dimensions at different scales. Its result is a transform-function data type.
+          </p>
+          <p>
+            This scaling transformation is characterized by a two-dimensional vector. Its coordinates define how much scaling is done in each direction. If both coordinates are equal, the scaling is uniform (isotropic) and the aspect ratio of the element is preserved (this is a homothetic transformation).
+          </p>
+          <p>
+            When a coordinate value is outside the [-1, 1] range, the element grows along that dimension; when inside, it shrinks. If it is negative, the result a point reflection in that dimension. A value of 1 has no effect.
+          </p>
+          <p>
+            The scale() function is specified with either one or two values, which represent the amount of scaling to be applied in each direction.
+            Usage: scale(sx) scale(sx, sy) </p>
+          <p>
+            Values:
+            <ul>
+              <li><b>sx</b>: A number representing the abscissa of the scaling vector.</li>
+              <li><b>sy</b>: A number representing the ordinate of the scaling vector. If not defined, its default value is sx, resulting in a uniform scaling that preserves the element's aspect ratio.</li>
+            </ul>
+          </p>
+      </div>
+      <div id="translate_info">
+
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

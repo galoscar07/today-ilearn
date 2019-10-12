@@ -1,0 +1,72 @@
+/* Back button */
+
+
+/* In order to display things nice*/
+.container {
+    width: 70%;
+    margin: auto;
+}
+.container > h1, h2, h3, h4 {
+    text-align:center;
+}
+/*Transition timing function examples*/
+.move {
+    margin: 2rem;
+    width: 150px;
+    height: 50px;
+    padding: 10px 15px;
+    background-color: red;
+    color: #fff;
+    line-height: 50px;
+    text-align:center;
+    border-radius: .5rem;
+    font-size: 20px;
+    transition-property: translate();
+    transition-duration: 3s;
+}
+#ease {
+    transition-timing-function: ease;
+}
+#linear {
+    transition-timing-function: linear;
+}
+#ease-out {
+    transition-timing-function: ease-out;
+}
+#ease-in {
+    transition-timing-function: ease-in;
+}
+#ease-in-out {
+    transition-timing-function: ease-in-out;
+}
+.move:hover {
+    transform: translate(900px, 0);
+}
+
+button {
+    height: 90px;
+    width: 290px;
+    font-size: 28px;
+    color: white;
+    border: none;
+    background-color: blue;
+
+    /*transition property is applied on a css attribute and it has to have a property and the duration of the transition in order for it to work*/
+    /*transition-property: background-color color width;*/
+
+    /*Also you can use the keyword all to specify that all the attribute should be considered up for change*/
+    /*transition-property: all;*/
+
+    /*Also there is a short way of writing the things above and that looks like:*/
+    /* transition: property duration timing-function transition-delay, and repeat */
+    transition: background-color 3s;
+
+    transition-duration: 1s;
+    transition-delay: 1s;
+}
+
+button:hover {
+    background-color: green;
+    color: black;
+    width: 600px;
+}

@@ -1,0 +1,59 @@
+.container {
+    width: 70%;
+    margin: auto;
+
+}
+.container > h1, h2, h3, h4 {
+    text-align:center;
+}
+
+.container_for_explications {
+    display: flex;
+    flex-flow: row;
+}
+
+.examples_container {
+    height: 100%;
+    width: 40%;
+}
+.more_info_container {
+    width: 50%;
+    height: 100%;
+}
+
+
+.move {
+    margin: 2rem;
+    margin-left: 9rem;
+    width: 150px;
+    height: 100px;
+    padding: 10px 15px;
+    background-color: bisque;
+    color: black;
+    line-height: 50px;
+    text-align:center;
+    border-radius: .5rem;
+    font-size: 20px;
+}
+
+#scale:hover {
+    transform: scale(2, 2);
+    transition-timing-function: ease;
+    transition-duration: 3s;
+}
+
+#translate:hover {
+    transform: translate(-150px);
+    transition-timing-function: ease;
+    transition-duration: 3s;
+}
+#rotate:hover {
+    transform: rotate(150deg);
+    transition-timing-function: ease;
+    transition-duration: 3s;
+}
+#skew:hover {
+    transform: skew(100deg, 50deg);
+    transition-timing-function: ease;
+    transition-duration: 3s;
+}
