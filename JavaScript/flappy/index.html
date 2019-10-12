@@ -1,0 +1,57 @@
+<!DOCTYPE html>  
+<html>
+    <head>  
+        <meta charset="utf-8" />
+        <title>FlappyTudor</title>
+        <script type="text/javascript" src="phaser.min.js"></script>
+        <script type="text/javascript" src="main.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Mansalva&display=swap" rel="stylesheet">
+        <style>
+            h1 {
+                font-family: 'Mansalva', cursive;
+                font-size: 6rem;
+                text-align: center
+            }
+            canvas {
+                margin: auto;
+            }
+            .butn {
+                -webkit-border-radius: 19;
+                -moz-border-radius: 19;
+                border-radius: 19px;
+                text-shadow: 3px 4px 11px #664c66;
+                font-family: Arial;
+                color: #ffffff;
+                font-size: 31px;
+                background: #71c5cf;
+                padding: 15px 29px 15px 29px;
+                text-decoration: none;
+                margin-left: 40px;
+                margin-bottom: 60px;
+            }
+
+            .butn:hover {
+            background: #3cb0fd;
+            background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+            background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+            background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+            background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+            background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+            text-decoration: none;
+            }
+            body {
+                background-color: rgba(117, 189, 58, 0.4);
+            }
+            p { 
+                font-size: 2rem;
+                text-align: center
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Flappy Tudor</h1>
+        <button class="butn" onclick="game.state.start('main');">Start</button>
+        <p>In order to jump press the green and black squares! Have fun! </p>
+    </body>  
+</html>  
