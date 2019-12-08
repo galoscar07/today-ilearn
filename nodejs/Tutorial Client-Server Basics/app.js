@@ -2,7 +2,7 @@ var express = require('express')
 var bodyParse = require('body-parser')
 var app = express()
 
-var urlencoderParser = bodyParseurl.urlencoded({extended: false})
+var urlencoderParser = bodyParse.urlencoded({extended: false})
 
 app.set('view engine', 'ejs')
 
@@ -26,6 +26,10 @@ app.get('/contact', function(request, response){
 app.get('/profile/:name', function(request, response){
   var data = {age: 29, job: 'ninja', hobbies: ['cooking', 'daancing']}
   response.render('profile', {person: request.params.name, data: data})
+})
+app.post('/contact', urlencoderParser, function(request, response){
+  console.log(request.body)
+  response.render('contact-success', {data: request.body})
 })
 
 app.listen(3000)
