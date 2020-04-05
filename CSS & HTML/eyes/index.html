@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html style="height: 100Vh; width: 100vw">
+<head>
+<title>Eyes</title>
+<link rel="stylesheet" href="eyes.css">
+</head>
+<body style="margin: 0; height: 100Vh; width: 100vw">
+
+<div class="container">
+    <div class="inputContainer">
+        <div>
+            <h1 style="margin-right: 15px">
+                Select an eye color:
+            </h1>
+            <input id="eyesColor" type="color" value="#AF90A9">
+        </div>
+    </div>
+
+    <div class="eyes-container">
+        <div class="eye">
+            <svg id="special" class="eyebrows" height='100' width='250'>
+                <polygon transform=scale(-1,1) transform-origin="center" points='20,60 20,100 250,20 250,1' style="fill:#463730;stroke:#896A67;stroke-width:1;" />
+            </svg>
+            <div class="pupil" id="eye1">
+                <div class="pupil-black"></div>
+            </div>
+        </div>
+        <div class="eye">
+            <svg class="eyebrows" height='100' width='250'>
+                <polygon points='20,60 20,100 250,20 250,1' style="fill:#463730;stroke:#896A67;stroke-width:1;" />
+            </svg>
+            <div class="pupil" id="eye2">
+                <div class="pupil-black"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src='app.js'></script>
+</body>
+</html>
