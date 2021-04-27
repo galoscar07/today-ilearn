@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <title>Vue from scratch</title>
+</head>
+<body>
+<div id="root">
+    <h1 v-bind:title="menu">{{title}}</h1>
+    <p v-text="content"></p>
+</div>
+<script>
+    new Vue({
+        el: '#root',
+        data: {
+            title: 'My title',
+            content: 'This is my first contet',
+            menu: 'My binded menu'
+        }
+    })
+</script>
+
+</body>
+</html>
